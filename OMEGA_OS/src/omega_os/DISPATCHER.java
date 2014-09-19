@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package omega_os;
 
-/**
- *
- * @author Pravinda Perera
- */
 public class DISPATCHER {
     
-    EXQUEUE ready;
-    EXQUEUE block;
+    EXQUEUE readyQueue;
+    EXQUEUE blockQueue;
     private PROCESS[] task;
     
     
@@ -25,8 +16,8 @@ public class DISPATCHER {
         task[2] = new PROCESS(3,55);
         task[3] = new PROCESS(4,99);
         task[4] = new PROCESS(5,66);
-        this.ready = ready;
-        this.block = block;
+        this.readyQueue = ready;
+        this.blockQueue = block;
        /* task[5] = new PROCESS(1,76);
         task[6] = new PROCESS(1,76);
         task[7] = new PROCESS(1,76);
@@ -34,38 +25,35 @@ public class DISPATCHER {
         task[9] = new PROCESS(1,76);
         task[10] = new PROCESS(1,76);*/
     }
-    public void startup(){                              //Enqueue processes to the ready queue
+    public void startup(){                              //Enqueue processes to the readyQueue queue
         for(int i=0;i<5;i++){
-            ready.Enqueue(task[i]);
+            readyQueue.Enqueue(task[i]);
         }
        
     }
     
-    /**
-     *
-     * @return
-     */
+
     public PROCESS dequeueReady(){                    //Dequeue Proceess from Ready Queue
-        if(!ready.Is_Queue_Empty()){
-        return (PROCESS) ready.Dequeue();
+        if(!readyQueue.Is_Queue_Empty()){
+        return (PROCESS) readyQueue.Dequeue();
         }
         else
             return null;
     }
     
     public void enqueueBlock(PROCESS pro){            //Enqueue Proceess from Block Queue
-        block.Enqueue(pro);
+        blockQueue.Enqueue(pro);
     }
     
     public PROCESS dequeueBlock(){                    //Dequeue Proceess from Block Queue
-        if(!block.Is_Queue_Empty()){
-        return (PROCESS) block.Dequeue();
+        if(!blockQueue.Is_Queue_Empty()){
+        return (PROCESS) blockQueue.Dequeue();
         }
         else
             return null;
     }
     
     public void enqueueReady(PROCESS pro){            //Enqueue Proceess from Ready Queue
-        ready.Enqueue(pro);
+        readyQueue.Enqueue(pro);
     }
 }

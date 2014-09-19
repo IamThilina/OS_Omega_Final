@@ -1,77 +1,73 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package omega_os;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
-/**
- *
- * @author Pravinda Perera
- */
-public class CPU {
+
+public class CPU {//extends TimerTask {
  
-   int timeCount=10, num1, time;
-   Random randomGenerator = new Random();
-   PROCESS process;
+   int timeCount=10; 
+   int num1;
+   int time;
+   Timer timer= new Timer();
+   Random randomVal = new Random();
+   PROCESS currentProcess;
    DISPATCHER dis;
    
-   public void getDispatcher(DISPATCHER dispatcher){              //Dispatcher reference created 
+   public void getDispatcher(DISPATCHER dispatcher){   //Dispatcher reference created 
        this.dis = dispatcher; 
    }
    
     
     public void execution(){ 
     
-        while(!dis.ready.Is_Queue_Empty() || !dis.block.Is_Queue_Empty()){  //Is both Ready and Block queues empty 
+        while(!dis.readyQueue.Is_Queue_Empty() || !dis.blockQueue.Is_Queue_Empty()){  //Is both Ready and Block queues empty 
             timeCount =10;                                   
-            if(!dis.ready.Is_Queue_Empty()){                                //Is ready queue empty 
-                 process = dis.dequeueReady();
+            if(!dis.readyQueue.Is_Queue_Empty()){   //Is readyQueue queue empty 
+                 currentProcess = dis.dequeueReady();
             }
-            else{                                                           //If Ready queue is empty dequeue from Block queue 
-                process = dis.dequeueBlock();                               
-                dis.ready.Enqueue(process);                                 
-                process=dis.dequeueReady();
+            else{                              //If Ready queue is empty then dequeue from Block queue 
+                currentProcess = dis.dequeueBlock();                               
+                dis.readyQueue.Enqueue(currentProcess);                                 
+                currentProcess=dis.dequeueReady();
             }
                 
         while(timeCount!=0){
          
-           num1 = 1 + randomGenerator.nextInt(5);                           //Random number generate to block the process
+           num1 = 1 + randomVal.nextInt(5);     //Random number generate to blockQueue the currentProcess
            
-           if(num1==process.getPid()){                                      //Running process blocked
+           if(num1==currentProcess.getPID()){          //Running currentProcess blocked
            
-               dis.block.Enqueue(process);
-               System.out.println("Process"+process.getPid()+"is blocked"+"The time -"+process.getExtime());
+               dis.blockQueue.Enqueue(currentProcess);
+               System.out.println("Process"+currentProcess.getPID()+"is blocked"+"The time -"+currentProcess.getExecutionTime());
                break;
            }
            else{                                                            //If Runiing Process not blocked
                timeCount--;
-               time = process.getExtime() - 1;
-               process.setExtime(time);
-               System.out.println("Process"+process.getPid()+"is running"+"The time -"+process.getExtime());
-               if(process.getExtime()==0){
-                  System.out.println("The Process"+process.getPid()+"Execution complete!!!!!");
+               time = currentProcess.getExecutionTime() - 1;
+               currentProcess.setExecutionTime(time);
+               System.out.println("Process"+currentProcess.getPID()+"is running"+"The time -"+currentProcess.getExecutionTime());
+               if(currentProcess.getExecutionTime()==0){
+                  System.out.println("The Process"+currentProcess.getPID()+"Execution complete!!!!!");
                   break;
                }
            }
          
         }
         if(timeCount==0){                                         //Process ends execution  
-           dis.ready.Enqueue(process);
+           dis.readyQueue.Enqueue(currentProcess);
         }
-        if(dis.block.Is_Queue_Empty()){                           //Block queue empty
+        if(dis.blockQueue.Is_Queue_Empty()){                           //Block queue empty
           continue;
         }
         else{
-            num1 = 1 + randomGenerator.nextInt(5);                //Random number generate to dequeue from block queue
-            if(num1==dis.block.getElement().getPid()){
-                process = dis.dequeueBlock();
-                dis.ready.Enqueue(process);
+            num1 = 1 + randomVal.nextInt(5);                //Random number generate to dequeue from blockQueue queue
+            if(num1==dis.blockQueue.getElement().getPID()){
+                currentProcess = dis.dequeueBlock();
+                dis.readyQueue.Enqueue(currentProcess);
             }
             else
-                continue;
+                ;//continue;
         }
         
     } 
