@@ -1,35 +1,35 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package omega_os;
 
+/**
+ *
+ * @author Pravinda Perera
+ */
 public class PROCESS {
-    private int pid;
-    //private String name;
-    private int extime; 
+    private int pid;                       //Process ID
+    private int extime;                    //Process total execution time
     
-    public PROCESS(int pid,int extime){
-   // this.name = name;
+    public PROCESS(int pid,int extime){    //Process Constructor
     this.pid = pid;
     this.extime = extime;
     }
 
-    public int getExtime() {
+    public int getExtime() {              
         return extime;
     }
 
-    public void instruction(){
-    }
- 
-    public int getPid() {
+    public int getPid() {        
         return pid;
     }
     
     public void setExtime(int time){
     
-        //time=extime;   // @Pravinda: this should be other way around,nah?
         extime=time;
     }
-
-   /* public String getName() {
-        return name;
-    }*/
 
 }

@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package omega_os;
 
 import java.util.*;
@@ -49,15 +55,7 @@ public class EXQUEUE<E>{
     }
     
     public PROCESS getElement(){
-        return (PROCESS) e.get(0);
+    return (PROCESS) e.get(0);
     }
 
-    
-//    public void reset(){
-//        
-//    for(int i=0;i<MAX_SIZE;i++){
-//        e[i]=e[i+1];
-//    }
-//    
-//    }
 }
