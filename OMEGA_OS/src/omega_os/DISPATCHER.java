@@ -35,7 +35,7 @@ public class DISPATCHER {
 
     public PROCESS dequeueReady(){                    //Dequeue Proceess from Ready Queue
         if(!readyQueue.Is_Queue_Empty()){
-        return (PROCESS) readyQueue.Dequeue();
+            return (PROCESS) readyQueue.Dequeue();
         }
         else
             return null;

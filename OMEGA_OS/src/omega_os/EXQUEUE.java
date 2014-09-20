@@ -39,7 +39,7 @@ public class EXQUEUE<E>{
         
     }
     
-    public void Print()
+    public void print()
     {
         int i;
         for(i=0;i<e.size();i++)
@@ -50,7 +50,7 @@ public class EXQUEUE<E>{
     }
     
     public PROCESS getElement(){
-        return (PROCESS) e.get(0);
+        return  (PROCESS)e.get(0);
     }
 
 }

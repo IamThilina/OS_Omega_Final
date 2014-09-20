@@ -2,7 +2,12 @@ package omega_os;
 
 public class PROCESS {
     private int PID;            //Process ID
-    private int executionTime;  //Process total execution time
+    private int numOfInstructions;  //Process total execution time
+    /*Note: in our project we are allocating an equal time for all theprocesses 
+            to execute an instruction
+    */
+    
+    private int elapsedTime_currentInstruction;
     
     private int ioStatus=0;  /* to keep track of the I/O instruction status 
                               * 0 = no I/O instructions to be execute
@@ -11,15 +16,16 @@ public class PROCESS {
     
     public PROCESS(int pid,int executionTime){    //Process Constructor
     this.PID = pid;
-    this.executionTime = executionTime;
+    this.numOfInstructions = executionTime;
     }
 
-    public int getExecutionTime() {              
-        return executionTime;
+
+    public int getNumOfInstructions() {              
+        return numOfInstructions;
     }
     
-    public void setExecutionTime(int executionTime){
-        this.executionTime=executionTime;
+    public void setNumOfInstructions(int numOfInstructions){
+        this.numOfInstructions=numOfInstructions;
     }
     
     public int getPID() {        
