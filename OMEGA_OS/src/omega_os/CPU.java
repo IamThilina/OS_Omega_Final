@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/* I am kolaya*/
 //long start = System.currentTimeMillis();
 //long end = start + 60*1000; // 60 seconds * 1000 ms/sec
 //while (System.currentTimeMillis() < end)
