@@ -1,5 +1,5 @@
 package omega_os;
-
+/*siri is fucker*/
 public class PROCESS {
     private int PID;            //Process ID
     private int numOfInstructions;  //Process total execution time
